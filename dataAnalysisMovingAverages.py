@@ -3,7 +3,7 @@ from tabulate import tabulate
 import json
 # Connect to database
 try:
-    
+
     with open('config.json', 'r') as f:
          config_data = json.load(f)
   

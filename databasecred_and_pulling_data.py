@@ -9,7 +9,7 @@ def connect_to_database():
     
     try:
 
-          
+
         # load config data from json
         with open('config.json', 'r') as f:
          config_data = json.load(f)
