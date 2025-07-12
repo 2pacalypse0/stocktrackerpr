@@ -7,12 +7,12 @@ def connect_to_database():
     try:
         # Connect to the database
         connection = mysql.connector.connect(
-            host='127.0.0.1',
-            port='3306',
+            host='your localhost',
+            port='port', #you might need the port it might throw out errors
             
-            user='root',
-            password='2pacAlivefastrap',
-            database='ruffridaz' )
+            user='username',
+            password='pass',
+            database='server name' ) #i had issue with the way my server was set up 
         
           
             
@@ -47,7 +47,7 @@ def main():
     if error is None:
         try:
             # Connect to database and download stock data
-            stock_data = yf.download('AAPL', start='2023-01-01', end='2024-06-25')
+            stock_data = yf.download('AAPL', start='2023-01-01', end='2024-06-25') #you need to change the stock option and dates for sampling here until i get around automating the process and visualzing it!
 
             # Insert the data into the database
             cursor = connection.cursor()
