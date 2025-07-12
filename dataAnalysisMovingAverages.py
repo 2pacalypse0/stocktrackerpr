@@ -3,12 +3,12 @@ from tabulate import tabulate
 # Connect to database
 try:
     connection = mysql.connector.connect(
-        host='127.0.0.1',
-        port = '3306',
+        host='your localhost',
+        port = 'port', #port might not be needed but i run into less errors when i specifie mine
         
-        user='root',
-        password='2pacAlivefastrap',
-        database='ruffridaz'
+        user='your username',
+        password='your password',
+        database='your server name' #it might be because of the way i set up my server but i had to name the database and server the same name to achive a connection
     )
 except mysql.connector.Error as err:
     print("Error connecting to database: {}".format(err))
