@@ -4,12 +4,12 @@ from datetime import date, timedelta
 #connection creds
 try:
     connection = mysql.connector.connect(
-        host='127.0.0.1',
-        port = '3306',
+        host='your localhost',
+        port = 'port',
         
-        user='root',
-        password='2pacAlivefastrap',
-        database='ruffridaz'
+        user='username',
+        password='your pass',
+        database='server name'
     )
 except mysql.connector.Error as err:
     print('Error when connecting to database: {}'.format(err))
