@@ -1,5 +1,6 @@
 import mysql.connector
 from tabulate import tabulate
+import json
 # Connect to database
 try:
     connection = mysql.connector.connect(
@@ -10,8 +11,27 @@ try:
         password='your password',
         database='your server name' #it might be because of the way i set up my server but i had to name the database and server the same name to achive a connection
     )
+    with open('config.json', 'r') as f:
+         config_data = json.load(f)
+  
+            
+        # pull the database connection deets from the config data
+         host = config_data['database']['host']
+         port = config_data['database']['port']
+         username = config_data['database']['username']
+         password = config_data['database']['password']
+         database = config_data['database']['name']
+        
+        #it now connects to the database using extracted deets
+         connection = mysql.connector.connect(
+            host=host,
+            port=int(port),
+            username=username,
+            password=password,
+            database=database
+        )
 except mysql.connector.Error as err:
-    print("Error connecting to database: {}".format(err))
+ print("Error connecting to database: {}".format(err))
 
 if connection:
     # Create a cursor object

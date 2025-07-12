@@ -1,10 +1,14 @@
 import yfinance as yf
 import mysql.connector
 from mysql.connector import Error
+import json
+
 
 
 def connect_to_database():
+    
     try:
+
         # Connect to the database
         connection = mysql.connector.connect(
             host='your localhost',
@@ -13,13 +17,34 @@ def connect_to_database():
             user='username',
             password='pass',
             database='server name' ) #i had issue with the way my server was set up 
+        # load config data from json
+        with open('config.json', 'r') as f:
+         config_data = json.load(f)
+  
+            
+        # pull the database connection deets from the config data
+        host = config_data['database']['host']
+        port = config_data['database']['port']
+        username = config_data['database']['username']
+        password = config_data['database']['password']
+        database = config_data['database']['name']
+
         
-          
-            
-            
+        #it now connects to the database using extracted deets
+        connection = mysql.connector.connect(
+            host=host,
+            port=int(port),
+            username=username,
+            password=password,
+            database=database
+        )
 
         return connection, None
-
+    #some blocks for errors
+    except FileNotFoundError:
+        print("Error: config.json not found.")
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON in config.json")
     except Error as e:
         print(f"Error connecting to the database: {e}")
         return None, f"Error connecting to the database: {e}"
@@ -44,7 +69,7 @@ def create_table_if_not_exists(connection):
 def main():
     connection, error = connect_to_database()
 
-    if error is None:
+    if connection is not None:
         try:
             # Connect to database and download stock data
             stock_data = yf.download('AAPL', start='2023-01-01', end='2024-06-25') #you need to change the stock option and dates for sampling here until i get around automating the process and visualzing it!
@@ -62,7 +87,7 @@ def main():
             print(f"Error inserting data into database: {e}")
             
 
-    if error is None:
+    if connection is not None:
         try:
             create_table_if_not_exists(connection)
 

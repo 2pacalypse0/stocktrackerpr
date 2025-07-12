@@ -1,8 +1,9 @@
 import mysql.connector 
 from datetime import date, timedelta
+import json
 
-#connection creds
 try:
+
     connection = mysql.connector.connect(
         host='your localhost',
         port = 'port',
@@ -11,6 +12,27 @@ try:
         password='your pass',
         database='server name'
     )
+
+#connection creds
+    with open('config.json', 'r') as f:
+         config_data = json.load(f)
+  
+            
+        # pull the database connection deets from the config data
+         host = config_data['database']['host']
+         port = config_data['database']['port']
+         username = config_data['database']['username']
+         password = config_data['database']['password']
+         database = config_data['database']['name']
+        
+        #it now connects to the database using extracted deets
+         connection = mysql.connector.connect(
+            host=host,
+            port=int(port),
+            username=username,
+            password=password,
+            database=database
+        )
 except mysql.connector.Error as err:
     print('Error when connecting to database: {}'.format(err))
     
