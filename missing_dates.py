@@ -4,14 +4,7 @@ import json
 
 try:
 
-    connection = mysql.connector.connect(
-        host='your localhost',
-        port = 'port',
-        
-        user='username',
-        password='your pass',
-        database='server name'
-    )
+  
 
 #connection creds
     with open('config.json', 'r') as f:
