@@ -3,14 +3,7 @@ from tabulate import tabulate
 import json
 # Connect to database
 try:
-    connection = mysql.connector.connect(
-        host='your localhost',
-        port = 'port', #port might not be needed but i run into less errors when i specifie mine
-        
-        user='your username',
-        password='your password',
-        database='your server name' #it might be because of the way i set up my server but i had to name the database and server the same name to achive a connection
-    )
+    
     with open('config.json', 'r') as f:
          config_data = json.load(f)
   

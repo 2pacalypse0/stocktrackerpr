@@ -9,14 +9,7 @@ def connect_to_database():
     
     try:
 
-        # Connect to the database
-        connection = mysql.connector.connect(
-            host='your localhost',
-            port='port', #you might need the port it might throw out errors
-            
-            user='username',
-            password='pass',
-            database='server name' ) #i had issue with the way my server was set up 
+          
         # load config data from json
         with open('config.json', 'r') as f:
          config_data = json.load(f)
